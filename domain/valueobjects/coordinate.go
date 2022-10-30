@@ -11,7 +11,3 @@ func NewCoordinates(x, y int) Coordinates {
 		Y: y,
 	}
 }
-
-func (c Coordinates) Move() {
-
-}

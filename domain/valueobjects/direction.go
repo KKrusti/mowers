@@ -28,5 +28,4 @@ func (direction Direction) RotateRight() {
 
 func (direction Direction) RotateLeft() {
 	direction.CardinalPoint.RotateLeft()
-	//direction.CardinalPoint = direction.CardinalPoint.RotateLeft()
 }
