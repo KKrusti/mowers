@@ -3,8 +3,8 @@ package domain
 import "github.com/KKrusti/mowers/domain/valueobjects"
 
 type Mower struct {
-	Direction   valueobjects.Direction
-	Coordinates valueobjects.Coordinates
+	Direction   *valueobjects.Direction
+	Coordinates *valueobjects.Coordinates
 }
 
 func NewMower(dir string, x, y int) Mower {
@@ -17,11 +17,11 @@ func NewMower(dir string, x, y int) Mower {
 
 	return Mower{
 		Direction:   direction,
-		Coordinates: coordinates,
+		Coordinates: &coordinates,
 	}
 }
 
-func (mower Mower) ExecuteCommand(command string) {
+func (mower *Mower) ExecuteCommand(command string) {
 	switch command {
 	case "R":
 		mower.Direction.RotateRight()
@@ -34,10 +34,26 @@ func (mower Mower) ExecuteCommand(command string) {
 	}
 }
 
-func (mower Mower) move() {
+func (mower *Mower) move() {
+	switch *mower.Direction {
+	case valueobjects.N:
+		mower.Coordinates.MoveUp()
+		return
+	case valueobjects.S:
+		mower.Coordinates.MoveDown()
+		return
+	case valueobjects.E:
+		mower.Coordinates.MoveRight()
+		return
+	case valueobjects.W:
+		mower.Coordinates.MoveLeft()
+		return
+	default:
+		//do not move
+	}
 
 }
 
-func (mower Mower) directionAsString() string {
-	return mower.Direction.CardinalPoint.String()
+func (mower *Mower) directionAsString() string {
+	return mower.Direction.String()
 }

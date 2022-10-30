@@ -1,11 +1,37 @@
 package valueobjects
 
-type Direction struct {
-	CardinalPoint *CardinalPoint
+type Direction int
+
+const (
+	N Direction = iota
+	E
+	S
+	W
+)
+
+func (c *Direction) String() string {
+	return [...]string{"N", "E", "S", "W"}[*c]
 }
 
-func NewDirection(direction string) Direction {
-	var dir CardinalPoint
+func (c *Direction) RotateRight() {
+	if *c == 3 {
+		*c = N
+		return
+	}
+	*c = *c + 1
+}
+
+func (c *Direction) RotateLeft() {
+	if *c == 0 {
+		*c = W
+		return
+	}
+	*c = *c - 1
+}
+
+// NewDirection method set the direction the mower is facing to. In case a wrong value is given, it'll be placed facing North
+func NewDirection(direction string) *Direction {
+	var dir Direction
 	switch direction {
 	case "N":
 		dir = N
@@ -15,17 +41,13 @@ func NewDirection(direction string) Direction {
 		dir = S
 	case "W":
 		dir = W
+	default:
+		dir = N
 	}
 
-	return Direction{
-		CardinalPoint: &dir,
-	}
+	return &dir
 }
 
-func (direction Direction) RotateRight() {
-	direction.CardinalPoint.RotateRight()
-}
-
-func (direction Direction) RotateLeft() {
-	direction.CardinalPoint.RotateLeft()
+func (direction *Direction) asString() string {
+	return direction.String()
 }
