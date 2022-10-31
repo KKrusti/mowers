@@ -141,3 +141,49 @@ func Test_rotate_right(t *testing.T) {
 		})
 	}
 }
+
+func Test_toString(t *testing.T) {
+	type args struct {
+		direction Direction
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "N",
+			args: args{
+				direction: N,
+			},
+			want: "N",
+		},
+		{
+			name: "E",
+			args: args{
+				direction: E,
+			},
+			want: "E",
+		},
+		{
+			name: "S",
+			args: args{
+				direction: S,
+			},
+			want: "S",
+		},
+		{
+			name: "W",
+			args: args{
+				direction: W,
+			},
+			want: "W",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			asString := tt.args.direction.String()
+			assert.Equal(t, tt.want, asString)
+		})
+	}
+}

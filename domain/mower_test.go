@@ -66,7 +66,7 @@ func Test_rotations(t *testing.T) {
 
 		t.Run(tt.name, func(t *testing.T) {
 			mower := NewMower("N", 0, 0)
-			mower.ExecuteCommand(tt.args.command)
+			mower.ExecuteMovement(tt.args.command)
 			assert.Equal(t, tt.want, mower.directionAsString())
 		})
 	}

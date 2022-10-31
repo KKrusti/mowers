@@ -21,7 +21,7 @@ func NewMower(dir string, x, y int) Mower {
 	}
 }
 
-func (mower *Mower) ExecuteCommand(command string) {
+func (mower *Mower) ExecuteMovement(command string) {
 	switch command {
 	case "R":
 		mower.Direction.RotateRight()
@@ -51,7 +51,6 @@ func (mower *Mower) move() {
 	default:
 		//do not move
 	}
-
 }
 
 func (mower *Mower) directionAsString() string {

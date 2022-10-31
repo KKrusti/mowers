@@ -33,8 +33,6 @@ func (c *Direction) RotateLeft() {
 func NewDirection(direction string) *Direction {
 	var dir Direction
 	switch direction {
-	case "N":
-		dir = N
 	case "E":
 		dir = E
 	case "S":
@@ -46,8 +44,4 @@ func NewDirection(direction string) *Direction {
 	}
 
 	return &dir
-}
-
-func (direction *Direction) asString() string {
-	return direction.String()
 }
