@@ -220,3 +220,15 @@ func TestPlateau_AddOccupiedCoordinate(t *testing.T) {
 		})
 	}
 }
+
+func TestPlateau_UpdateOccupiedCoordinate(t *testing.T) {
+	plateau := NewPlateau(5, 5)
+	oldCoordinates := valueobjects.NewCoordinates(1, 1)
+	plateau.addOccupiedCoordinate(*oldCoordinates)
+	newCoordinates := valueobjects.NewCoordinates(1, 2)
+
+	plateau.UpdateOccupiedCoordinate(*oldCoordinates, *newCoordinates)
+
+	assert.Equal(t, false, plateau.isOccupiedCoordinate(*oldCoordinates))
+	assert.Equal(t, true, plateau.isOccupiedCoordinate(*newCoordinates))
+}

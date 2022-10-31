@@ -10,12 +10,12 @@ type MoveMower struct {
 	Plateau domain.Plateau
 }
 
-func (moveMowerHandler MoveMower) ExecuteCommand(mowerCommand infrastructure.InputCommand) string {
+func (moveMowerHandler MoveMower) ExecuteCommand(mowerCommand infrastructure.InputCommand) []string {
 	moveMowerHandler.Plateau = domain.NewPlateau(mowerCommand.GetPlateauDimensions())
 
-	moveMowerHandler.processMowers(mowerCommand.GetMowerCommand())
+	result := moveMowerHandler.processMowers(mowerCommand.GetMowerCommand())
 
-	return ""
+	return result
 }
 
 func (moveMowerHandler MoveMower) processMowers(mowerCommands []infrastructure.MowerCommand) []string {
@@ -24,11 +24,21 @@ func (moveMowerHandler MoveMower) processMowers(mowerCommands []infrastructure.M
 		mowerInitialConfig := mowerCommands[i].GetMowerInitialStatusCommand()
 		moveMowerHandler.Mower = domain.NewMower(mowerInitialConfig.Direction, mowerInitialConfig.PosX, mowerInitialConfig.PosY)
 		for _, move := range mowerCommands[i].GetMowerMoves() {
-			//if moveMowerHandler.Plateau.IsAvailableCoordinate() {
-			moveMowerHandler.Mower.ExecuteMovement(move)
-			//}
+			if isCommandMove(move) {
+				nextCoordinate := moveMowerHandler.Mower.CheckNextMoveCoordinate()
+				if moveMowerHandler.Plateau.IsAvailableCoordinate(nextCoordinate) {
+					moveMowerHandler.Plateau.UpdateOccupiedCoordinate(*moveMowerHandler.Mower.Coordinates, nextCoordinate)
+					moveMowerHandler.Mower.ExecuteMovement(move)
+				}
+			} else {
+				moveMowerHandler.Mower.ExecuteMovement(move)
+			}
 		}
 		result[i] = moveMowerHandler.Mower.CurrentStatus()
 	}
 	return result
+}
+
+func isCommandMove(move string) bool {
+	return move == domain.MOVE
 }

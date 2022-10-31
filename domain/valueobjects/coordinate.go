@@ -16,8 +16,20 @@ func (coordinates *Coordinates) MoveUp() {
 	coordinates.Y += 1
 }
 
-func (coordinates Coordinates) UP() Coordinates {
-	return *NewCoordinates(coordinates.Y, coordinates.Y+1)
+func (coordinates Coordinates) Up() Coordinates {
+	return *NewCoordinates(coordinates.X, coordinates.Y+1)
+}
+
+func (coordinates Coordinates) Down() Coordinates {
+	return *NewCoordinates(coordinates.X, coordinates.Y-1)
+}
+
+func (coordinates Coordinates) Left() Coordinates {
+	return *NewCoordinates(coordinates.X-1, coordinates.Y)
+}
+
+func (coordinates Coordinates) Right() Coordinates {
+	return *NewCoordinates(coordinates.Y+1, coordinates.Y)
 }
 
 func (coordinates *Coordinates) MoveDown() {

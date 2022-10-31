@@ -5,6 +5,8 @@ import (
 	"github.com/KKrusti/mowers/domain/valueobjects"
 )
 
+const MOVE = "M"
+
 type Mower struct {
 	Direction   *valueobjects.Direction
 	Coordinates *valueobjects.Coordinates
@@ -30,26 +32,28 @@ func (mower *Mower) ExecuteMovement(command string) {
 		mower.Direction.RotateRight()
 	case "L":
 		mower.Direction.RotateLeft()
-	case "M":
+	case MOVE:
 		mower.move()
 	default:
 		//in case the command is not valid the mower stays in the same place, facing same direction
 	}
 }
 
-//
-//func (mower *Mower) CheckNextMoveCoordinate() valueobjects.Coordinates {
-//	switch *mower.Direction {
-//	case valueobjects.N:
-//		return mower.Coordinates.UP()
-//	case valueobjects.S:
-//		return mower.Coordinates.MoveDown()
-//	case valueobjects.E:
-//		return mower.Coordinates.MoveRight()
-//	case valueobjects.W:
-//		return mower.Coordinates.MoveLeft()
-//	}
-//}
+func (mower *Mower) CheckNextMoveCoordinate() valueobjects.Coordinates {
+	switch *mower.Direction {
+	case valueobjects.N:
+		return mower.Coordinates.Up()
+	case valueobjects.S:
+		return mower.Coordinates.Down()
+	case valueobjects.E:
+		return mower.Coordinates.Right()
+	case valueobjects.W:
+		return mower.Coordinates.Left()
+	default:
+		return *mower.Coordinates
+	}
+
+}
 
 func (mower *Mower) move() {
 	switch *mower.Direction {

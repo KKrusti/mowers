@@ -23,9 +23,9 @@ func NewMowerCommand(command []string) MowerCommand {
 func parseInitialConfig(command string) valueobjects.MowerInitialConfig {
 	initialConfig := strings.Split(command, " ")
 	return valueobjects.MowerInitialConfig{
-		Direction: initialConfig[0],
-		PosX:      shared.StringToInt(initialConfig[1]),
-		PosY:      shared.StringToInt(initialConfig[2]),
+		Direction: initialConfig[2],
+		PosX:      shared.StringToInt(initialConfig[0]),
+		PosY:      shared.StringToInt(initialConfig[1]),
 	}
 }
 

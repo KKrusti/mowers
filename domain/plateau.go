@@ -33,6 +33,14 @@ func (plateau *Plateau) addOccupiedCoordinate(coordinates valueobjects.Coordinat
 	}
 }
 
+func (plateau *Plateau) UpdateOccupiedCoordinate(oldCoordinates, newCoordinates valueobjects.Coordinates) {
+	for i, coordinate := range plateau.occupiedCoordinates {
+		if coordinate.X == oldCoordinates.X && coordinate.Y == oldCoordinates.Y {
+			plateau.occupiedCoordinates[i] = newCoordinates
+		}
+	}
+}
+
 func (plateau *Plateau) isInsideLimits(coordinates valueobjects.Coordinates) bool {
 	return plateau.isCoordinateXInsideLimits(coordinates) &&
 		plateau.isCoordinateYInsideLimits(coordinates)

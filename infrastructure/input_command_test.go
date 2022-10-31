@@ -1,56 +1,58 @@
 package infrastructure
 
 import (
+	"github.com/KKrusti/mowers/domain/valueobjects"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewMowerCommand(t *testing.T) {
-	plateauCommand := "5 5"
+	inputPlateau := "5 5"
 	mowerInitialStatusCommand := "1 2 N"
 	mowerCommandMovements := "LMLMLMLMM"
 
-	mowerCommand := NewInputCommand([]string{plateauCommand, mowerInitialStatusCommand, mowerCommandMovements})
+	inputCommand := NewInputCommand([]string{inputPlateau, mowerInitialStatusCommand, mowerCommandMovements})
+	expectedMowerCommand := []MowerCommand{{
+		mowerCommandInitialConfig: valueobjects.MowerInitialConfig{
+			Direction: "N",
+			PosX:      1,
+			PosY:      2,
+		},
+		mowerCommandMovements: []string{"L", "M", "L", "M", "L", "M", "L", "M", "M"},
+	},
+	}
 
-	assert.Equal(t, plateauCommand, mowerCommand.plateauCommand)
-	//assert.Equal(t, mowerInitialStatusCommand, mowerCommand.mowerCommandInitialConfig)
-	//assert.Equal(t, mowerCommandMovements, mowerCommand.mowerCommandMovements)
+	assert.Equal(t, inputPlateau, inputCommand.plateauCommand)
+	assert.Equal(t, expectedMowerCommand, inputCommand.mowerCommand)
 }
 
-func TestMowerCommand_GetPlateauCommand(t *testing.T) {
-	//plateauCommand := "5 5"
-	//
-	//mowerCommand := NewInputCommand([]string{plateauCommand, "", ""})
-	//assert.Equal(t, plateauCommand, mowerCommand.GetPlateauDimensions())
+func TestMowerCommand_GetPlateauDimensions(t *testing.T) {
+	plateauCommand := "5 4"
+	mowerInitialStatusCommand := "1 2 N"
+	mowerCommandMovements := "LMLMLMLMM"
+
+	inputCommand := NewInputCommand([]string{plateauCommand, mowerInitialStatusCommand, mowerCommandMovements})
+	dimensionX, dimensionY := inputCommand.GetPlateauDimensions()
+
+	assert.Equal(t, 5, dimensionX)
+	assert.Equal(t, 4, dimensionY)
 }
 
-//func TestMowerCommand_GetMowerInitialStatusCommand(t *testing.T) {
-//	mowerInitialStatusCommand := "1 2 N"
-//
-//	mowerCommand := NewInputCommand([]string{"", mowerInitialStatusCommand, ""})
-//	assert.Equal(t, mowerInitialStatusCommand, mowerCommand.GetMowerInitialStatusCommand())
-//}
+func TestMowerCommand_GetMowerCommand(t *testing.T) {
+	plateauCommand := "5 4"
 
-//func TestMowerCommand_GetMowerMovementsCommand(t *testing.T) {
-//	mowerCommandMovements := "LMLMLMLMM"
-//
-//	mowerCommand := NewInputCommand([]string{"", "", mowerCommandMovements})
-//
-//	assert.Equal(t, mowerCommandMovements, mowerCommand.GetMowerMovementsCommand())
-//}
+	inputCommand := NewInputCommand([]string{plateauCommand, "1 2 N", "LMLMLMLMM"})
+	mowerCommand := inputCommand.GetMowerCommand()
 
-//func TestMowerCommand_SeveralMowersCommands(t *testing.T) {
-//	plateauCommand := "5 5"
-//	mowerInitialStatusCommand1 := "1 2 N"
-//	mowerCommandMovements1 := "LMLMLMLMM"
-//	mowerInitialStatusCommand2 := "3 4 E"
-//	mowerCommandMovements2 := "MRMMRMMLM"
-//
-//	mowerCommand := NewInputCommand([]string{plateauCommand, mowerInitialStatusCommand1, mowerCommandMovements1, mowerInitialStatusCommand2, mowerCommandMovements2})
-//
-//	assert.Equal(t, plateauCommand, mowerCommand.GetMowerMovementsCommand())
-//	assert.Equal(t, mowerInitialStatusCommand1, mowerCommand.GetMowerMovementsCommand())
-//	assert.Equal(t, mowerCommandMovements1, mowerCommand.GetMowerMovementsCommand())
-//	assert.Equal(t, mowerInitialStatusCommand2, mowerCommand.GetMowerMovementsCommand())
-//	assert.Equal(t, mowerCommandMovements2, mowerCommand.GetMowerMovementsCommand())
-//}
+	expectedMowerCommand := []MowerCommand{{
+		mowerCommandInitialConfig: valueobjects.MowerInitialConfig{
+			Direction: "N",
+			PosX:      1,
+			PosY:      2,
+		},
+		mowerCommandMovements: []string{"L", "M", "L", "M", "L", "M", "L", "M", "M"},
+	},
+	}
+
+	assert.Equal(t, expectedMowerCommand, mowerCommand)
+}

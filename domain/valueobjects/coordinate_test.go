@@ -50,3 +50,39 @@ func Test_move_right(t *testing.T) {
 
 	assert.Equal(t, expectedCoordinates, coordinates)
 }
+
+func TestCoordinate_UP(t *testing.T) {
+	coordinates := NewCoordinates(1, 1)
+
+	newCoordinate := coordinates.Up()
+	expectedCoordinates := NewCoordinates(1, 2)
+
+	assert.Equal(t, expectedCoordinates, &newCoordinate)
+}
+
+func TestCoordinate_Down(t *testing.T) {
+	coordinates := NewCoordinates(1, 1)
+
+	newCoordinate := coordinates.Down()
+	expectedCoordinates := NewCoordinates(1, 0)
+
+	assert.Equal(t, expectedCoordinates, &newCoordinate)
+}
+
+func TestCoordinate_Left(t *testing.T) {
+	coordinates := NewCoordinates(1, 1)
+
+	newCoordinate := coordinates.Left()
+	expectedCoordinates := NewCoordinates(0, 1)
+
+	assert.Equal(t, expectedCoordinates, &newCoordinate)
+}
+
+func TestCoordinate_Right(t *testing.T) {
+	coordinates := NewCoordinates(1, 1)
+
+	newCoordinate := coordinates.Right()
+	expectedCoordinates := NewCoordinates(2, 1)
+
+	assert.Equal(t, expectedCoordinates, &newCoordinate)
+}
