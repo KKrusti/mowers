@@ -124,5 +124,38 @@ func Test_move(t *testing.T) {
 			assert.Equal(t, tt.want, tt.args.mower.Coordinates)
 		})
 	}
+}
+
+func TestMower_CurrentStatus(t *testing.T) {
+	type args struct {
+		mower Mower
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "position 1",
+			args: args{
+				mower: NewMower("N", 1, 1),
+			},
+			want: "N 1 1",
+		},
+		{
+			name: "position 2",
+			args: args{
+				mower: NewMower("S", 10, 3),
+			},
+			want: "S 10 3",
+		},
+	}
+	for _, tt := range tests {
+
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.args.mower.CurrentStatus()
+			assert.Equal(t, tt.want, got)
+		})
+	}
 
 }

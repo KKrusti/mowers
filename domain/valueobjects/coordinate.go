@@ -16,6 +16,10 @@ func (coordinates *Coordinates) MoveUp() {
 	coordinates.Y += 1
 }
 
+func (coordinates Coordinates) UP() Coordinates {
+	return *NewCoordinates(coordinates.Y, coordinates.Y+1)
+}
+
 func (coordinates *Coordinates) MoveDown() {
 	coordinates.Y -= 1
 }

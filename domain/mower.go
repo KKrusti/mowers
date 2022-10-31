@@ -1,6 +1,9 @@
 package domain
 
-import "github.com/KKrusti/mowers/domain/valueobjects"
+import (
+	"fmt"
+	"github.com/KKrusti/mowers/domain/valueobjects"
+)
 
 type Mower struct {
 	Direction   *valueobjects.Direction
@@ -34,6 +37,20 @@ func (mower *Mower) ExecuteMovement(command string) {
 	}
 }
 
+//
+//func (mower *Mower) CheckNextMoveCoordinate() valueobjects.Coordinates {
+//	switch *mower.Direction {
+//	case valueobjects.N:
+//		return mower.Coordinates.UP()
+//	case valueobjects.S:
+//		return mower.Coordinates.MoveDown()
+//	case valueobjects.E:
+//		return mower.Coordinates.MoveRight()
+//	case valueobjects.W:
+//		return mower.Coordinates.MoveLeft()
+//	}
+//}
+
 func (mower *Mower) move() {
 	switch *mower.Direction {
 	case valueobjects.N:
@@ -49,10 +66,18 @@ func (mower *Mower) move() {
 		mower.Coordinates.MoveLeft()
 		return
 	default:
-		//do not move
+		//this will never happen since when wrong direction is added, it's defaulted to N
 	}
 }
 
 func (mower *Mower) directionAsString() string {
 	return mower.Direction.String()
+}
+
+func (mower *Mower) CurrentStatus() string {
+	direction := mower.Direction.String()
+	posX := mower.Coordinates.X
+	posY := mower.Coordinates.Y
+
+	return fmt.Sprintf("%s %d %d", direction, posX, posY)
 }

@@ -1,7 +1,9 @@
 package usecases
 
-import "github.com/KKrusti/mowers/domain/valueobjects"
+import (
+	"github.com/KKrusti/mowers/infrastructure"
+)
 
 type MoveMowerInterface interface {
-	ExecuteCommand(command valueobjects.MowerCommand)
+	ExecuteCommand(command infrastructure.InputCommand) string
 }
