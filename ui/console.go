@@ -7,7 +7,7 @@ import (
 	"io"
 )
 
-const fileName = "input_with_no_plateau.txt"
+const fileName = "input.txt"
 
 func ConsoleExit(out io.Writer) int {
 	fileReader, err := infrastructure.NewInputFileReader(fileName)
