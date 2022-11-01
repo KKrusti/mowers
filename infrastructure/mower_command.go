@@ -46,3 +46,7 @@ func (mowerCommand MowerCommand) GetMowerInitialStatusCommand() valueobjects.Mow
 func (mowerCommand MowerCommand) GetMowerMoves() []string {
 	return mowerCommand.mowerCommandMovements
 }
+
+func (mowerCommand MowerCommand) IsCorrect() bool {
+	return true
+}

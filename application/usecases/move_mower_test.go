@@ -16,7 +16,7 @@ func TestMoveMower_ProcessMowers(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want []string
+		want string
 	}{
 		{
 			name: "moves1",
@@ -28,7 +28,7 @@ func TestMoveMower_ProcessMowers(t *testing.T) {
 					infrastructure.NewMowerCommand([]string{"0 0 N", "MMRMMR"}),
 				},
 			},
-			want: []string{"2 2 S"},
+			want: "2 2 S\n",
 		},
 		{
 			name: "moves goes out of bounds",
@@ -40,7 +40,7 @@ func TestMoveMower_ProcessMowers(t *testing.T) {
 					infrastructure.NewMowerCommand([]string{"5 5 N", "MRMRMML"}),
 				},
 			},
-			want: []string{"5 3 E"},
+			want: "5 3 E\n",
 		},
 		{
 			name: "moves two mowers no collisions",
@@ -53,7 +53,7 @@ func TestMoveMower_ProcessMowers(t *testing.T) {
 					infrastructure.NewMowerCommand([]string{"2 2 E", "RMMLMMMLL"}),
 				},
 			},
-			want: []string{"2 4 N", "5 0 W"},
+			want: "2 4 N\n5 0 W\n",
 		},
 		{
 			name: "moves three mowers third collide with first",
@@ -67,7 +67,7 @@ func TestMoveMower_ProcessMowers(t *testing.T) {
 					infrastructure.NewMowerCommand([]string{"1 5 S", "MLMMLM"}),
 				},
 			},
-			want: []string{"2 4 N", "5 0 W", "1 5 N"},
+			want: "2 4 N\n5 0 W\n1 5 N\n",
 		},
 	}
 	for _, tt := range tests {
@@ -149,6 +149,6 @@ func TestMoveMower_ExecuteCommand(t *testing.T) {
 
 	got := moveMower.ExecuteCommand(inputCommand)
 
-	expectedResult := []string{"1 3 N"}
+	expectedResult := "1 3 N\n"
 	assert.Equal(t, expectedResult, got)
 }

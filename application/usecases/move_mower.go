@@ -11,7 +11,7 @@ type MoveMower struct {
 	Plateau domain.Plateau
 }
 
-func (moveMowerHandler MoveMower) ExecuteCommand(mowerCommand infrastructure.InputCommand) []string {
+func (moveMowerHandler MoveMower) ExecuteCommand(mowerCommand infrastructure.InputCommand) string {
 	moveMowerHandler.Plateau = domain.NewPlateau(mowerCommand.GetPlateauDimensions())
 
 	result := moveMowerHandler.processMowers(mowerCommand.GetMowerCommand())
@@ -19,8 +19,8 @@ func (moveMowerHandler MoveMower) ExecuteCommand(mowerCommand infrastructure.Inp
 	return result
 }
 
-func (moveMowerHandler MoveMower) processMowers(mowerCommands []infrastructure.MowerCommand) []string {
-	result := make([]string, len(mowerCommands))
+func (moveMowerHandler MoveMower) processMowers(mowerCommands []infrastructure.MowerCommand) string {
+	result := ""
 	for i := 0; i < len(mowerCommands); i++ {
 		mowerInitialConfig := mowerCommands[i].GetMowerInitialStatusCommand()
 		moveMowerHandler.Mower = domain.NewMower(mowerInitialConfig.Direction, mowerInitialConfig.PosX, mowerInitialConfig.PosY)
@@ -37,7 +37,7 @@ func (moveMowerHandler MoveMower) processMowers(mowerCommands []infrastructure.M
 				moveMowerHandler.moveMower(move)
 			}
 		}
-		result[i] = moveMowerHandler.getMowerCurrentStatus()
+		result = result + moveMowerHandler.getMowerCurrentStatus() + "\n"
 	}
 	return result
 }
