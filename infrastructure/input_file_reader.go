@@ -14,7 +14,7 @@ type InputFileReader struct {
 func NewInputFileReader(fileName string) (InputFileReader, error) {
 	inputFile, err := os.Open(fileName)
 	if err != nil {
-		fmt.Println(fmt.Errorf("loading input file %v", err))
+		fmt.Println(fmt.Errorf("error loading input file %v", err))
 		return InputFileReader{}, err
 	}
 	return InputFileReader{

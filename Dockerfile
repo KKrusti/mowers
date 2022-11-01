@@ -10,5 +10,5 @@ COPY *.go ./
 
 RUN go build -o /mowers
 
-CMD [ "/mowers" ]
+CMD [ "/mowers" , "input.txt"]
 

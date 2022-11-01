@@ -1,2 +1,3 @@
-# mowers kata
+# mowers challenge
+
 

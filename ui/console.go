@@ -7,14 +7,12 @@ import (
 	"io"
 )
 
-const fileName = "input.txt"
-
-func ConsoleExit(out io.Writer) int {
-	fileReader, err := infrastructure.NewInputFileReader(fileName)
+func ConsoleExit(out io.Writer, filePath string) int {
+	fileReader, err := createFileReader(filePath)
 	if err != nil {
-		println(fmt.Sprintf("error ocurred while opening the file %v", err))
 		return 0
 	}
+
 	inputCommand, err := fileReader.ReadFromFile()
 	if err != nil {
 		println(fmt.Sprintf("error ocurred while reading from file %v", err))
@@ -27,5 +25,15 @@ func ConsoleExit(out io.Writer) int {
 	if err != nil {
 		println(fmt.Sprintf("error ocurred while reading writting to Standard output %v", err))
 	}
+
 	return 0
+}
+
+func createFileReader(filePath string) (infrastructure.InputFileReader, error) {
+	fileReader, err := infrastructure.NewInputFileReader(filePath)
+	if err != nil {
+		println(fmt.Sprintf("error ocurred while opening the file %v", err))
+		return infrastructure.InputFileReader{}, err
+	}
+	return fileReader, nil
 }
