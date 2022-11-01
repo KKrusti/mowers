@@ -6,6 +6,7 @@ The following assumptions have been considered for the mowers to behave as expec
 * Since a Mower is placed by a worker in the plateau, mowers are unable to be placed outside the plateau dimensions and/or in the same position as another mower that is already in the plateau.
 * Mowers can not collide with other mowers or move outside the plateau dimensions. To avoid this, if a mower tries to move to an unavailable position, the movement will be ignored, other movements will be processed as well as they're valid.
 * To avoid verifications and simplify the code, configuration file is filled correctly as described on the instructions.
+  * If the file format is correct, the orientation of mower initial position is flexible. In case an incorrect orientation is given (different to NESW) it will be defaulted to N. 
 
 
 ## Installation
