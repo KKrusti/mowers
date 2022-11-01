@@ -12,8 +12,8 @@ func Test_new_plateau(t *testing.T) {
 
 	newPlateau := NewPlateau(xCoord, yCoord)
 	expectedPlateau := Plateau{
-		DimensionX:          xCoord,
-		DimensionY:          yCoord,
+		dimensionX:          xCoord,
+		dimensionY:          yCoord,
 		occupiedCoordinates: []valueobjects.Coordinates{},
 	}
 
@@ -139,8 +139,8 @@ func TestPlateau_isOccupiedCoordinate(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			plateau := Plateau{
-				DimensionX:          tt.fields.DimensionX,
-				DimensionY:          tt.fields.DimensionY,
+				dimensionX:          tt.fields.DimensionX,
+				dimensionY:          tt.fields.DimensionY,
 				occupiedCoordinates: tt.fields.occupiedCoordinate,
 			}
 			assert.Equal(t, tt.want, plateau.isOccupiedCoordinate(tt.args.coordinate))
@@ -211,8 +211,8 @@ func TestPlateau_AddOccupiedCoordinate(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			plateau := Plateau{
-				DimensionX:          tt.fields.DimensionX,
-				DimensionY:          tt.fields.DimensionY,
+				dimensionX:          tt.fields.DimensionX,
+				dimensionY:          tt.fields.DimensionY,
 				occupiedCoordinates: tt.fields.occupiedCoordinate,
 			}
 			plateau.AddOccupiedCoordinate(tt.args.coordinate)

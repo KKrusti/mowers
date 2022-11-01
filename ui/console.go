@@ -10,13 +10,13 @@ import (
 func ConsoleExit(out io.Writer, filePath string) int {
 	fileReader, err := createFileReader(filePath)
 	if err != nil {
-		return 0
+		return 1
 	}
 
 	inputCommand, err := fileReader.ReadFromFile()
 	if err != nil {
-		println(fmt.Sprintf("error ocurred while reading from file %v", err))
-		return 0
+		println(fmt.Sprintf("error ocurred while reading from file: %v", err))
+		return 1
 	}
 
 	useCase := usecases.MoveMower{}

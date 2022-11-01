@@ -14,11 +14,8 @@ func Test_new_mower(t *testing.T) {
 	newMower := NewMower(direction, xCoord, yCoord)
 
 	expectedMower := Mower{
-		direction: valueobjects.NewDirection(direction),
-		coordinates: &valueobjects.Coordinates{
-			X: xCoord,
-			Y: yCoord,
-		},
+		direction:   valueobjects.NewDirection(direction),
+		coordinates: valueobjects.NewCoordinates(xCoord, yCoord),
 	}
 
 	assert.Equal(t, expectedMower, newMower)
@@ -57,7 +54,7 @@ func Test_rotations(t *testing.T) {
 		{
 			name: "invalid command",
 			args: args{
-				command: "X",
+				command: "x",
 			},
 			want: "N",
 		},
@@ -112,7 +109,7 @@ func Test_move(t *testing.T) {
 		{
 			name: "Wrong value defaults to N",
 			args: args{
-				mower: NewMower("X", 1, 1),
+				mower: NewMower("x", 1, 1),
 			},
 			want: valueobjects.NewCoordinates(1, 2),
 		},
@@ -200,7 +197,7 @@ func TestMower_CheckNextMoveCoordinate(t *testing.T) {
 		{
 			name: "Wrong value defaults north",
 			args: args{
-				mower: NewMower("X", 1, 1),
+				mower: NewMower("x", 1, 1),
 			},
 			want: valueobjects.NewCoordinates(1, 2),
 		},

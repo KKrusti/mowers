@@ -6,15 +6,15 @@ import (
 )
 
 type Plateau struct {
-	DimensionX          int
-	DimensionY          int
+	dimensionX          int
+	dimensionY          int
 	occupiedCoordinates []valueobjects.Coordinates
 }
 
 func NewPlateau(x, y int) Plateau {
 	return Plateau{
-		DimensionX:          x,
-		DimensionY:          y,
+		dimensionX:          x,
+		dimensionY:          y,
 		occupiedCoordinates: []valueobjects.Coordinates{},
 	}
 }
@@ -47,9 +47,9 @@ func (plateau *Plateau) isInsideLimits(coordinates valueobjects.Coordinates) boo
 }
 
 func (plateau *Plateau) isCoordinateXInsideLimits(coordinate valueobjects.Coordinates) bool {
-	return coordinate.X >= 0 && coordinate.X <= plateau.DimensionX
+	return coordinate.X >= 0 && coordinate.X <= plateau.dimensionX
 }
 
 func (plateau *Plateau) isCoordinateYInsideLimits(coordinate valueobjects.Coordinates) bool {
-	return coordinate.Y >= 0 && coordinate.Y <= plateau.DimensionY
+	return coordinate.Y >= 0 && coordinate.Y <= plateau.dimensionY
 }
