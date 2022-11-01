@@ -29,7 +29,7 @@ func (coordinates Coordinates) Left() Coordinates {
 }
 
 func (coordinates Coordinates) Right() Coordinates {
-	return *NewCoordinates(coordinates.Y+1, coordinates.Y)
+	return *NewCoordinates(coordinates.X+1, coordinates.Y)
 }
 
 func (coordinates *Coordinates) MoveDown() {

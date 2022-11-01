@@ -8,8 +8,8 @@ import (
 const MOVE = "M"
 
 type Mower struct {
-	Direction   *valueobjects.Direction
-	Coordinates *valueobjects.Coordinates
+	direction   *valueobjects.Direction
+	coordinates *valueobjects.Coordinates
 }
 
 func NewMower(dir string, x, y int) Mower {
@@ -21,17 +21,17 @@ func NewMower(dir string, x, y int) Mower {
 	direction := valueobjects.NewDirection(dir)
 
 	return Mower{
-		Direction:   direction,
-		Coordinates: &coordinates,
+		direction:   direction,
+		coordinates: &coordinates,
 	}
 }
 
 func (mower *Mower) ExecuteMovement(command string) {
 	switch command {
 	case "R":
-		mower.Direction.RotateRight()
+		mower.direction.RotateRight()
 	case "L":
-		mower.Direction.RotateLeft()
+		mower.direction.RotateLeft()
 	case MOVE:
 		mower.move()
 	default:
@@ -40,34 +40,34 @@ func (mower *Mower) ExecuteMovement(command string) {
 }
 
 func (mower *Mower) CheckNextMoveCoordinate() valueobjects.Coordinates {
-	switch *mower.Direction {
+	switch *mower.direction {
 	case valueobjects.N:
-		return mower.Coordinates.Up()
+		return mower.coordinates.Up()
 	case valueobjects.S:
-		return mower.Coordinates.Down()
+		return mower.coordinates.Down()
 	case valueobjects.E:
-		return mower.Coordinates.Right()
+		return mower.coordinates.Right()
 	case valueobjects.W:
-		return mower.Coordinates.Left()
+		return mower.coordinates.Left()
 	default:
-		return *mower.Coordinates
+		return *mower.coordinates
 	}
 
 }
 
 func (mower *Mower) move() {
-	switch *mower.Direction {
+	switch *mower.direction {
 	case valueobjects.N:
-		mower.Coordinates.MoveUp()
+		mower.coordinates.MoveUp()
 		return
 	case valueobjects.S:
-		mower.Coordinates.MoveDown()
+		mower.coordinates.MoveDown()
 		return
 	case valueobjects.E:
-		mower.Coordinates.MoveRight()
+		mower.coordinates.MoveRight()
 		return
 	case valueobjects.W:
-		mower.Coordinates.MoveLeft()
+		mower.coordinates.MoveLeft()
 		return
 	default:
 		//this will never happen since when wrong direction is added, it's defaulted to N
@@ -75,13 +75,17 @@ func (mower *Mower) move() {
 }
 
 func (mower *Mower) directionAsString() string {
-	return mower.Direction.String()
+	return mower.direction.String()
 }
 
 func (mower *Mower) CurrentStatus() string {
-	direction := mower.Direction.String()
-	posX := mower.Coordinates.X
-	posY := mower.Coordinates.Y
+	direction := mower.direction.String()
+	posX := mower.coordinates.X
+	posY := mower.coordinates.Y
 
-	return fmt.Sprintf("%s %d %d", direction, posX, posY)
+	return fmt.Sprintf("%d %d %s", posX, posY, direction)
+}
+
+func (mower *Mower) GetCoordinates() *valueobjects.Coordinates {
+	return mower.coordinates
 }

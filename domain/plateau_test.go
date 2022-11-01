@@ -215,7 +215,7 @@ func TestPlateau_AddOccupiedCoordinate(t *testing.T) {
 				DimensionY:          tt.fields.DimensionY,
 				occupiedCoordinates: tt.fields.occupiedCoordinate,
 			}
-			plateau.addOccupiedCoordinate(tt.args.coordinate)
+			plateau.AddOccupiedCoordinate(tt.args.coordinate)
 			assert.Equal(t, tt.want, plateau.occupiedCoordinates)
 		})
 	}
@@ -224,7 +224,7 @@ func TestPlateau_AddOccupiedCoordinate(t *testing.T) {
 func TestPlateau_UpdateOccupiedCoordinate(t *testing.T) {
 	plateau := NewPlateau(5, 5)
 	oldCoordinates := valueobjects.NewCoordinates(1, 1)
-	plateau.addOccupiedCoordinate(*oldCoordinates)
+	plateau.AddOccupiedCoordinate(*oldCoordinates)
 	newCoordinates := valueobjects.NewCoordinates(1, 2)
 
 	plateau.UpdateOccupiedCoordinate(*oldCoordinates, *newCoordinates)

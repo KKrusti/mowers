@@ -14,8 +14,8 @@ func Test_new_mower(t *testing.T) {
 	newMower := NewMower(direction, xCoord, yCoord)
 
 	expectedMower := Mower{
-		Direction: valueobjects.NewDirection(direction),
-		Coordinates: &valueobjects.Coordinates{
+		direction: valueobjects.NewDirection(direction),
+		coordinates: &valueobjects.Coordinates{
 			X: xCoord,
 			Y: yCoord,
 		},
@@ -121,7 +121,7 @@ func Test_move(t *testing.T) {
 
 		t.Run(tt.name, func(t *testing.T) {
 			tt.args.mower.move()
-			assert.Equal(t, tt.want, tt.args.mower.Coordinates)
+			assert.Equal(t, tt.want, tt.args.mower.coordinates)
 		})
 	}
 }
@@ -140,14 +140,14 @@ func TestMower_CurrentStatus(t *testing.T) {
 			args: args{
 				mower: NewMower("N", 1, 1),
 			},
-			want: "N 1 1",
+			want: "1 1 N",
 		},
 		{
 			name: "position 2",
 			args: args{
 				mower: NewMower("S", 10, 3),
 			},
-			want: "S 10 3",
+			want: "10 3 S",
 		},
 	}
 	for _, tt := range tests {
@@ -212,4 +212,13 @@ func TestMower_CheckNextMoveCoordinate(t *testing.T) {
 			assert.Equal(t, tt.want, &got)
 		})
 	}
+}
+
+func TestMower_GetCoordinates(t *testing.T) {
+	mower := NewMower("W", 3, 4)
+
+	got := mower.GetCoordinates()
+
+	expectedCoordinates := valueobjects.NewCoordinates(3, 4)
+	assert.Equal(t, expectedCoordinates, got)
 }

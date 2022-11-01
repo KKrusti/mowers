@@ -27,7 +27,7 @@ func (plateau *Plateau) isOccupiedCoordinate(coordinate valueobjects.Coordinates
 	return slices.Contains(plateau.occupiedCoordinates, coordinate)
 }
 
-func (plateau *Plateau) addOccupiedCoordinate(coordinates valueobjects.Coordinates) {
+func (plateau *Plateau) AddOccupiedCoordinate(coordinates valueobjects.Coordinates) {
 	if plateau.isInsideLimits(coordinates) {
 		plateau.occupiedCoordinates = append(plateau.occupiedCoordinates, coordinates)
 	}
