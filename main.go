@@ -11,6 +11,7 @@ func main() {
 		fmt.Printf("Missing program arguments. Remember to attach the path to the file")
 	} else {
 		fileName := os.Args[1]
-		os.Exit(ui.ConsoleExit(os.Stdout, fileName))
+		console := ui.Console{}
+		os.Exit(console.ConsoleExit(os.Stdout, fileName))
 	}
 }

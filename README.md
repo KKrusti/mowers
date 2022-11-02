@@ -8,6 +8,14 @@ The following assumptions have been considered for the mowers to behave as expec
 * To avoid verifications and simplify the code, configuration file is filled correctly as described on the instructions.
   * If the file format is correct, the orientation of mower initial position is flexible. In case an incorrect orientation is given (different to NESW) it will be defaulted to N. 
 
+## Architecture
+This is the first time using hexagonal architecture. The code has been divided into 4 layers: 
+* application: where the use case is found, it acts as an orchestrator between the logic found on each both domain entities.
+* domain: here we can find the two identified domain entities: mower and plateau. In addition, some valueobjects can be found here too
+* infrastructure: this layer receives the call from the presentation layer to execute some logic that is not from domain one.
+* ui/presentation: this is a small layer that calls infrastructure to process some info and then communicates with application laywer.
+
+TDD has been applied in domain and application layer.
 
 ## Installation
 

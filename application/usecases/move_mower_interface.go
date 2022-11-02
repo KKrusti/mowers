@@ -5,5 +5,5 @@ import (
 )
 
 type MoveMowerInterface interface {
-	ExecuteCommand(command infrastructure.InputCommand) []string
+	ExecuteCommand(command infrastructure.InputCommand) string
 }

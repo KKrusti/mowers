@@ -7,7 +7,11 @@ import (
 	"io"
 )
 
-func ConsoleExit(out io.Writer, filePath string) int {
+type Console struct {
+	useCase usecases.MoveMowerInterface
+}
+
+func (console Console) ConsoleExit(out io.Writer, filePath string) int {
 	fileReader, err := createFileReader(filePath)
 	if err != nil {
 		return 1
@@ -19,8 +23,8 @@ func ConsoleExit(out io.Writer, filePath string) int {
 		return 1
 	}
 
-	useCase := usecases.MoveMower{}
-	response := useCase.ExecuteCommand(inputCommand)
+	console.useCase = usecases.MoveMower{}
+	response := console.useCase.ExecuteCommand(inputCommand)
 	_, err = fmt.Fprintf(out, response)
 	if err != nil {
 		println(fmt.Sprintf("error ocurred while reading writting to Standard output %v", err))
