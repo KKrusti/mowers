@@ -7,6 +7,7 @@ The following assumptions have been considered for the mowers to behave as expec
 * Mowers can not collide with other mowers or move outside the plateau dimensions. To avoid this, if a mower tries to move to an unavailable position, the movement will be ignored, other movements will be processed as well as they're valid.
 * To avoid verifications and simplify the code, configuration file is filled correctly as described on the instructions.
   * If the file format is correct, the orientation of mower initial position is flexible. In case an incorrect orientation is given (different to NESW) it will be defaulted to N. 
+  * As in the point above, if the format is correct, but it's given an invalid number character, it's defaulted to 0.
 
 ## Architecture
 This is the first time using hexagonal architecture. The code has been divided into 4 layers: 
