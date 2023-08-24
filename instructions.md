@@ -25,12 +25,12 @@ Each mower will be finished sequentially, which means that the second mower wonâ
 The output for each mower should be its final coordinates and heading.
 
 #### Input Test Case #1:
-5 5
-1 2 N
-LMLMLMLMM
-3 3 E
+5 5<br />
+1 2 N<br />
+LMLMLMLMM<br />
+3 3 E<br />
 MMRMMRMRRM
 
 #### Output Test Case #2:
-1 3 N
+1 3 N<br />
 5 1 E
